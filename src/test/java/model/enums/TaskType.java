@@ -1,0 +1,5 @@
+package model.enums;
+
+public enum TaskType {
+    DEVELOPMENT, INTERVIEWING, MANAGEMENT, RECRUITMENT, PAID_VACATION, DOCUMENTATION
+}
