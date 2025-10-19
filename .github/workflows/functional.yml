@@ -1,0 +1,28 @@
+name: Functional Tests (dev-test)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  functional-dev:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+
+      - name: Run Functional Tests
+        run: mvn clean test -DsuiteXmlFile=src/test/resources/suites/testng-functional.xml -Dtc.env=dev-test
+
+      - name: Upload Allure Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results-functional-dev
+          path: target/allure-results
