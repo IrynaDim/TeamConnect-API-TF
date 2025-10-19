@@ -1,0 +1,19 @@
+teamconnect:
+  baseUrl: "http://tracker-prod-tc3.eu-north-1.elasticbeanstalk.com"
+
+  auth:
+    baseUrl: "http://auth-service.eu-north-1.elasticbeanstalk.com"
+
+  users:
+    employee:
+      email: "john.doe@example.com"
+      password: "connecT@"
+    pm:
+      email: "laura.wilson@example.com"
+      password: "connecT@"
+    hr:
+      email: "sarah.brown@example.com"
+      password: "connecT@"
+    admin:
+      email: "admin@example.com"
+      password: "connecT@"

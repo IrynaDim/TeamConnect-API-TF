@@ -1,0 +1,50 @@
+[
+  {
+    "id": 11,
+    "firstName": "John",
+    "lastName": "Doe",
+    "avatarUrl": "https://example.com/avatar11.jpg",
+    "workEmail": "john.doe@example.com",
+    "hireDate": "2020-08-17",
+    "grade": "SENIOR",
+    "gender": "FEMALE",
+    "technologyStack": [
+      { "id": 3, "name": "Java" },
+      { "id": 14, "name": "Docker" },
+      { "id": 15, "name": "SQL" },
+      { "id": 17, "name": "Git" }
+    ],
+    "department": { "id": 1, "name": "Software Development" },
+    "position":   { "id": 1, "name": "Software Engineer" },
+    "projects": [
+      { "id": 21, "name": "Internal" },
+      { "id": 4, "name": "CloudForge" },
+      { "id": 14, "name": "InnovateX" }
+    ]
+  },
+
+  {
+    "id": 12,
+    "firstName": "John",
+    "lastName": "Doe",
+    "avatarUrl": "https://example.com/avatar11.jpg",
+    "workEmail": "john.doe@example.com",
+    "hireDate": "2020-08-17",
+    "grade": "SENIOR",
+    "gender": "FEMALE",
+    "technologyStack": [
+      { "id": 3, "name": "Java" },
+      { "id": 14, "name": "Docker" },
+      { "id": 15, "name": "SQL" },
+      { "id": 17, "name": "Git" }
+    ],
+    "department": { "id": 1, "name": "Software Development" },
+    "position":   { "id": 1, "name": "Software Engineer" },
+    "projects": [
+      { "id": 21, "name": "Internal" },
+      { "id": 14, "name": "InnovateX" },
+      { "id": 14, "name": "InnovateX" }
+    ]
+  }
+
+]
