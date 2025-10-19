@@ -38,3 +38,12 @@ jobs:
           publish_branch: gh-pages
           publish_dir: allure-report
           destination_dir: allure-functional
+          user_name: "github-actions[bot]"
+          user_email: "github-actions[bot]@users.noreply.github.com"
+
+      - name: Add Allure Report URL to summary
+        if: always()
+        run: |
+          echo "### ✅ Allure report published successfully!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "🔗 [Open Allure Report](https://irynadim.github.io/TeamConnect-API-TF/allure-functional/)" >> $GITHUB_STEP_SUMMARY
