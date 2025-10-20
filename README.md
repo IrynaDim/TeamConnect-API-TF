@@ -80,6 +80,8 @@ The report includes:
 * request and response attachments,
 * logs and debug information.
 
+Example of the error message in Allure report:
+![img.png](img.png)
 
 ## ⚙ Configuration
 
