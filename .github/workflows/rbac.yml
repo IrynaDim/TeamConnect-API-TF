@@ -6,6 +6,7 @@ on:
 jobs:
   rbac-dev:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -20,9 +21,29 @@ jobs:
       - name: Run RBAC Tests
         run: mvn clean test -DsuiteXmlFile=src/test/resources/suites/testng-rbac.xml -Dtc.env=dev-test
 
-      - name: Upload Allure Results
+      - name: Install Allure
+        run: npm install -g allure-commandline --save-dev
+
+      - name: Generate Allure Report
         if: always()
-        uses: actions/upload-artifact@v4
+        run: |
+          allure generate target/allure-results --clean -o allure-report
+          touch allure-report/.nojekyll
+
+      - name: Deploy Allure Report to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          name: allure-results-rbac-dev
-          path: target/allure-results
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-report
+          destination_dir: allure-rbac
+          user_name: "github-actions[bot]"
+          user_email: "github-actions[bot]@users.noreply.github.com"
+
+      - name: Add Allure Report URL to summary
+        if: always()
+        run: |
+          echo "### ✅ Allure RBAC report published successfully!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "🔗 [Open Allure RBAC Report](https://irynadim.github.io/TeamConnect-API-TF/allure-rbac/)" >> $GITHUB_STEP_SUMMARY
