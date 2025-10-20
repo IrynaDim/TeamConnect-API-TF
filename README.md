@@ -80,6 +80,8 @@ The report includes:
 * request and response attachments,
 * logs and debug information.
 
+Example of the error message in Allure report:
+![img.png](img.png)
 
 ## ⚙ Configuration
 
@@ -91,3 +93,26 @@ Environment is selected via JVM parameter:
 ```bash
 -Dtc.env=dev-test
 ```
+
+## ⚙️ CI/CD Integration (GitHub Actions)
+
+This project includes a fully configured **GitHub Actions** pipeline for automated test execution.
+
+### 🔁 Workflows
+
+| Workflow | Environment | Description |
+|-----------|--------------|--------------|
+| **Functional Tests (dev-test)** | DEV | Runs functional test suite with CRUD and validation scenarios. |
+| **RBAC Tests (dev-test)** | DEV | Validates role-based access and permissions. |
+| **Smoke Tests (prod-test)** | PROD | Executes lightweight availability checks on production APIs. |
+| **pages-build-deployment** | — | Deploys generated reports (e.g., Allure) to GitHub Pages. |
+
+Each workflow:
+- Automatically installs dependencies via Maven,
+- Runs TestNG test suites based on the specified environment,
+- Generates **Allure reports** at the end of execution.
+
+### 📊 Allure Report Publishing
+
+After each successful run, the **Allure report** is automatically published and linked directly in the workflow summary.
+
