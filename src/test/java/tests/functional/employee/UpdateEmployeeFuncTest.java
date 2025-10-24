@@ -38,7 +38,6 @@ public class UpdateEmployeeFuncTest extends BaseConfiguration {
     public void restoreEmployeeState() {
         if (employeeBeforeUpdate != null) {
             try {
-                log.info("Restoring employee state after test...");
                 UserUpdateRequest restoreRequest =
                         JsonUtils.mapper().convertValue(employeeBeforeUpdate, UserUpdateRequest.class);
                 employeeSteps.update(restoreRequest, SC_OK);
