@@ -1,12 +1,14 @@
 package tests.smoke;
 
+import annotations.Auth;
+import constants.AuthParameters;
+import constants.TestGroup;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 import steps.EmployeeSteps;
 import tests.BaseConfiguration;
-import constants.TestGroup;
 
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
@@ -15,8 +17,6 @@ import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
 @Feature("Employee")
 public class EmployeeSmokeTest extends BaseConfiguration {
     private final EmployeeSteps steps = new EmployeeSteps(this::spec);
-    private final EmployeeSteps noAuthSteps = new EmployeeSteps(this::noAuth);
-    private final EmployeeSteps invalidTokenSteps = new EmployeeSteps(this::withInvalidToken);
 
     @Issue("SMK-01")
     @Test(groups = TestGroup.SMOKE)
@@ -32,13 +32,15 @@ public class EmployeeSmokeTest extends BaseConfiguration {
 
     @Issue("SMK-05")
     @Test(groups = TestGroup.SMOKE)
+    @Auth(AuthParameters.NO_AUTH)
     public void shouldReturn401_whenGetEmployeesWithoutToken() {
-        noAuthSteps.getAll(SC_UNAUTHORIZED);
+        steps.getAll(SC_UNAUTHORIZED);
     }
 
     @Issue("SMK-06")
     @Test(groups = TestGroup.SMOKE)
+    @Auth(AuthParameters.INVALID_TOKEN)
     public void shouldReturn403_whenGetEmployeesWithInvalidToken() {
-        invalidTokenSteps.getAll(SC_UNAUTHORIZED); // или SC_FORBIDDEN, если API возвращает 403
+        steps.getAll(SC_UNAUTHORIZED);
     }
 }

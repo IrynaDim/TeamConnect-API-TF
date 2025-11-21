@@ -7,9 +7,9 @@ import io.qameta.allure.Issue;
 import model.dto.user.UserResponse;
 import org.testng.annotations.Test;
 import steps.EmployeeSteps;
-import tests.BaseConfiguration;
 import constants.TestGroup;
 import fixture.FixtureLoader;
+import tests.functional.FunctionalBaseTest;
 
 import static constants.testData.CommonTestData.NON_EXISTENT_ID;
 import static org.apache.http.HttpStatus.SC_NOT_FOUND;
@@ -18,7 +18,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @Epic("Functional tests")
 @Feature("Employees")
-public class GetEmployeeFuncTest extends BaseConfiguration {
+public class GetEmployeeFuncTest extends FunctionalBaseTest {
     private final EmployeeSteps employeeSteps = new EmployeeSteps(this::spec);
 
     @Issue("FUNC-01")

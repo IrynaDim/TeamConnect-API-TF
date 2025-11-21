@@ -11,7 +11,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import steps.TimeLogSteps;
-import tests.BaseConfiguration;
+import tests.functional.FunctionalBaseTest;
 
 import java.time.LocalDate;
 
@@ -21,7 +21,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @Epic("Functional tests")
 @Feature("Time Logs")
-public class CreateTimeLogFuncTest extends BaseConfiguration {
+public class CreateTimeLogFuncTest extends FunctionalBaseTest {
 
     private final TimeLogSteps timeLogSteps = new TimeLogSteps(this::spec);
     private Long createdTimeLogId;

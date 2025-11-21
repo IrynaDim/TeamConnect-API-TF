@@ -32,10 +32,6 @@ public final class TokenProvider {
         return "Bearer invalid_token";
     }
 
-    public String emptyBearer() {
-        return "Bearer ";
-    }
-
     public String token(Role role) {
         if (role == null) {
             throw new IllegalArgumentException("Role must not be null");

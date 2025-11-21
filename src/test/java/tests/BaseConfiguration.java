@@ -1,7 +1,9 @@
 package tests;
 
-import annotations.AuthUser;
+import annotations.Auth;
+import constants.AuthParameters;
 import constants.Routes;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.qameta.allure.testng.AllureTestNg;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -27,7 +29,7 @@ public abstract class BaseConfiguration {
 
     private static RequestSpecification BASE_SPEC;
     private static final TokenProvider TOKENS = new TokenProvider();
-    private final ThreadLocal<Role> currentRole = new ThreadLocal<>();
+    private final ThreadLocal<AuthParameters> currentAuth = new ThreadLocal<>();
 
     @BeforeSuite(alwaysRun = true)
     public void setup() {
@@ -35,6 +37,7 @@ public abstract class BaseConfiguration {
                 .setBaseUri(EnvConfig.apiBaseUrl())
                 .setContentType(JSON)
                 .setAccept(JSON)
+                .addFilter(new AllureRestAssured())
                 .addFilter((req, res, ctx) -> {
                     Response response = ctx.next(req, res);
                     ApiErrorListener.setLastResponse(response);
@@ -48,31 +51,40 @@ public abstract class BaseConfiguration {
     }
 
     @BeforeMethod(alwaysRun = true)
-    public void initRole(Method method) {
-        AuthUser auth = method.getAnnotation(AuthUser.class);
-        if (auth == null) auth = method.getDeclaringClass().getAnnotation(AuthUser.class);
-        currentRole.set(auth == null ? Role.EMPLOYEE : auth.value());
+    public void initAuth(Method method) {
+        Auth auth = method.getAnnotation(Auth.class);
+        if (auth == null) auth = method.getDeclaringClass().getAnnotation(Auth.class);
+
+        currentAuth.set(auth == null ? AuthParameters.EMPLOYEE : auth.value());
     }
 
     @AfterMethod(alwaysRun = true)
-    public void clearRole() {
-        currentRole.remove();
+    public void clearAuth() {
+        currentAuth.remove();
     }
 
     protected RequestSpecification spec() {
-        return RestAssured.given()
-                .spec(BASE_SPEC)
-                .header("Authorization", TOKENS.bearer(currentRole.get()));
+        AuthParameters auth = currentAuth.get();
+
+        return switch (auth) {
+            case NO_AUTH -> RestAssured.given().spec(BASE_SPEC);
+            case INVALID_TOKEN -> RestAssured.given()
+                    .spec(BASE_SPEC)
+                    .header("Authorization", TOKENS.invalidBearer());
+            default -> RestAssured.given()
+                    .spec(BASE_SPEC)
+                    .header("Authorization", TOKENS.bearer(mapToRole(auth)));
+        };
     }
 
-    protected RequestSpecification noAuth() {
-        return RestAssured.given().spec(BASE_SPEC);
-    }
-
-    protected RequestSpecification withInvalidToken() {
-        return RestAssured.given()
-                .spec(BASE_SPEC)
-                .header("Authorization", TOKENS.invalidBearer());
+    private Role mapToRole(AuthParameters auth) {
+        return switch (auth) {
+            case EMPLOYEE -> Role.EMPLOYEE;
+            case PM -> Role.PM;
+            case HR -> Role.HR;
+            case ADMIN -> Role.ADMIN;
+            default -> throw new IllegalArgumentException("Invalid role: " + auth);
+        };
     }
 
     protected void checkHealth() {

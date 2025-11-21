@@ -14,8 +14,7 @@ public class EptSteps extends BaseSteps {
         super(spec);
     }
 
-    @Step("Get EPT list for current user")
     public List<EptResponse> getForCurrentUser(int expectedStatus) {
-        return getList(Routes.Ept.CURRENT.getPath(), expectedStatus, EptResponse.class);
+        return getList(Routes.Ept.CURRENT.getPath(), expectedStatus);
     }
 }

@@ -7,7 +7,7 @@
     "workEmail": "john.doe@example.com",
     "hireDate": "2020-08-17",
     "grade": "SENIOR",
-    "gender": "FEMALE",
+    "gender": "MALE",
     "technologyStack": [
       { "id": 3, "name": "Java" },
       { "id": 14, "name": "Docker" },
@@ -25,11 +25,11 @@
 
   {
     "id": 12,
-    "firstName": "John",
-    "lastName": "Doe",
-    "avatarUrl": "https://example.com/avatar11.jpg",
-    "workEmail": "john.doe@example.com",
-    "hireDate": "2020-08-17",
+    "firstName": "Ivanna",
+    "lastName": "Kohut",
+    "avatarUrl": "https://example.com/avatar12.jpg",
+    "workEmail": "ivanna.kohut@example.com",
+    "hireDate": "2017-08-17",
     "grade": "SENIOR",
     "gender": "FEMALE",
     "technologyStack": [
@@ -42,8 +42,7 @@
     "position":   { "id": 1, "name": "Software Engineer" },
     "projects": [
       { "id": 21, "name": "Internal" },
-      { "id": 14, "name": "InnovateX" },
-      { "id": 14, "name": "InnovateX" }
+      { "id": 4, "name": "CloudForge" }
     ]
   }
 
