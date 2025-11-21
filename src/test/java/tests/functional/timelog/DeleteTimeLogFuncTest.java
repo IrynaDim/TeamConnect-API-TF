@@ -8,7 +8,7 @@ import io.qameta.allure.Issue;
 import model.dto.timelog.TimeLogResponse;
 import org.testng.annotations.Test;
 import steps.TimeLogSteps;
-import tests.BaseConfiguration;
+import tests.functional.FunctionalBaseTest;
 
 import static constants.testData.CommonTestData.NON_EXISTENT_ID;
 import static constants.testData.EptTestData.EMPLOYEE_11_DEVELOPMENT;
@@ -18,7 +18,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @Epic("Functional tests")
 @Feature("Time Logs")
-public class DeleteTimeLogFuncTest extends BaseConfiguration {
+public class DeleteTimeLogFuncTest extends FunctionalBaseTest {
 
     private final TimeLogSteps timeLogSteps = new TimeLogSteps(this::spec);
 

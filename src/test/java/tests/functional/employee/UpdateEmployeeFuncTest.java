@@ -4,14 +4,13 @@ import factory.UserUpdateDtoFactory;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
-import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 import model.dto.user.UserCurrentResponse;
 import model.dto.user.UserUpdateRequest;
 import org.testng.annotations.*;
 import steps.EmployeeSteps;
-import tests.BaseConfiguration;
 import constants.TestGroup;
+import tests.functional.FunctionalBaseTest;
 import util.JsonUtils;
 
 import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
@@ -21,20 +20,18 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @Epic("Functional tests")
 @Feature("Employees")
 @Slf4j
-public class UpdateEmployeeFuncTest extends BaseConfiguration {
+public class UpdateEmployeeFuncTest extends FunctionalBaseTest {
 
     private final EmployeeSteps employeeSteps = new EmployeeSteps(this::spec);
 
     private UserCurrentResponse employeeBeforeUpdate;
 
     @BeforeMethod(alwaysRun = true)
-    @Step("Saving current employee state before test")
     public void saveCurrentEmployeeState() {
         employeeBeforeUpdate = employeeSteps.getCurrent(SC_OK);
     }
 
     @AfterMethod(alwaysRun = true)
-    @Step("Restoring employee state  in DB after test")
     public void restoreEmployeeState() {
         if (employeeBeforeUpdate != null) {
             try {

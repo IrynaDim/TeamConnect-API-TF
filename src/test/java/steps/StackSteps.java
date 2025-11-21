@@ -14,8 +14,7 @@ public class StackSteps extends BaseSteps {
         super(spec);
     }
 
-    @Step("Get all technology stacks")
     public List<NamedIdDto> getAll(int expectedStatus) {
-        return getList(Routes.Stack.BASE.getPath(), expectedStatus, NamedIdDto.class);
+        return getList(Routes.Stack.BASE.getPath(), expectedStatus);
     }
 }

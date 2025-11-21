@@ -1,6 +1,6 @@
 package annotations;
 
-import model.enums.Role;
+import constants.AuthParameters;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -9,6 +9,6 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD, ElementType.TYPE})
-public @interface AuthUser {
-    Role value() default Role.EMPLOYEE;
+public @interface Auth {
+    AuthParameters value() default AuthParameters.EMPLOYEE;
 }

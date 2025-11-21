@@ -80,10 +80,17 @@
                 <version>3.2.5</version>
                 <configuration>
                     <testNGArtifactName>org.testng:testng</testNGArtifactName>
+
+                    <parallel>${parallel}</parallel>
+                    <threadCount>${threadCount}</threadCount>
+
                     <suiteXmlFiles>
                         <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
+
                     <systemPropertyVariables>
+                        <parallel>${parallel}</parallel>
+                        <threadCount>${threadCount}</threadCount>
                         <tc.env>${tc.env}</tc.env>
                         <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
                     </systemPropertyVariables>

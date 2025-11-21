@@ -1,6 +1,7 @@
 package tests.authz.timeLog;
 
-import annotations.AuthUser;
+import annotations.Auth;
+import constants.AuthParameters;
 import constants.TestGroup;
 import constants.testData.EptTestData;
 import factory.TimeLogDtoFactory;
@@ -8,16 +9,15 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
 import model.dto.timelog.TimeLogResponse;
-import model.enums.Role;
 import org.testng.annotations.Test;
 import steps.TimeLogSteps;
-import tests.BaseConfiguration;
+import tests.authz.AuthzBaseTest;
 
 import static org.apache.http.HttpStatus.*;
 
 @Epic("Authorization")
 @Feature("RBAC")
-public class TimeLogsDeleteAuthTest extends BaseConfiguration {
+public class TimeLogsDeleteAuthTest extends AuthzBaseTest {
 
     private final TimeLogSteps timeLogSteps = new TimeLogSteps(this::spec);
 
@@ -34,28 +34,28 @@ public class TimeLogsDeleteAuthTest extends BaseConfiguration {
     }
 
     @Issue("RBAC-03")
-    @AuthUser(Role.PM)
+    @Auth(AuthParameters.PM)
     @Test(groups = TestGroup.RBAC)
     public void shouldDeleteTimeLog_pmRoleSubordinateRecord() {
         assertCanDelete(timeLogSteps.create(TimeLogDtoFactory.create(EptTestData.EMPLOYEE_11_DEVELOPMENT), SC_OK), SC_OK);
     }
 
     @Issue("RBAC-04")
-    @AuthUser(Role.PM)
+    @Auth(AuthParameters.PM)
     @Test(groups = TestGroup.RBAC)
     public void shouldReturn400_pmRoleNonSubordinateRecord() {
         timeLogSteps.deleteById(EptTestData.EMPLOYEE_9_DEVELOPMENT.getId(), SC_BAD_REQUEST);
     }
 
     @Issue("RBAC-05")
-    @AuthUser(Role.HR)
+    @Auth(AuthParameters.HR)
     @Test(groups = TestGroup.RBAC)
     public void shouldDeleteTimeLog_hrRoleAnyUser() {
         assertCanDelete(timeLogSteps.create(TimeLogDtoFactory.create(EptTestData.HR_5_INTERVIEW), SC_OK), SC_OK);
     }
 
     @Issue("RBAC-06")
-    @AuthUser(Role.ADMIN)
+    @Auth(AuthParameters.ADMIN)
     @Test(groups = TestGroup.RBAC)
     public void shouldDeleteTimeLog_adminRoleAnyUser() {
         assertCanDelete(timeLogSteps.create(TimeLogDtoFactory.create(EptTestData.HR_5_INTERVIEW), SC_OK), SC_OK);

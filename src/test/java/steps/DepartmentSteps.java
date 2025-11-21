@@ -1,6 +1,5 @@
 package steps;
 
-import io.qameta.allure.Step;
 import io.restassured.specification.RequestSpecification;
 import model.dto.DepartmentResponse;
 import constants.Routes;
@@ -14,8 +13,7 @@ public class DepartmentSteps extends BaseSteps {
         super(spec);
     }
 
-    @Step("Get all departments")
     public List<DepartmentResponse> getAll(int expectedStatus) {
-        return getList(Routes.Department.BASE.getPath(), expectedStatus, DepartmentResponse.class);
+        return getList(Routes.Department.BASE.getPath(), expectedStatus);
     }
 }
