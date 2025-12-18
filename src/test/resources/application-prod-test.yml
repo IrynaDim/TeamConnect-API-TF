@@ -1,8 +1,8 @@
 teamconnect:
-  baseUrl: "http://tracker-prod-tc3.eu-north-1.elasticbeanstalk.com"
+  baseUrl: "http://tracker-prod.us-east-2.elasticbeanstalk.com"
 
   auth:
-    baseUrl: "http://auth-service.eu-north-1.elasticbeanstalk.com"
+    baseUrl: "https://auth-env.us-east-2.elasticbeanstalk.com"
 
   users:
     employee:

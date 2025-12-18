@@ -19,8 +19,8 @@ This repository contains an **API Test Framework** that provides:
 
 | Environment | Description | Base URL |
 |--------------|--------------|-----------|
-| **PROD** | Production environment – read-only mode (Smoke tests) | `http://tracker-prod-tc3.eu-north-1.elasticbeanstalk.com/swagger-ui/index.html` |
-| **DEV** | Development environment – full CRUD functionality | `http://tracker-panel-activity-dev.eu-north-1.elasticbeanstalk.com/swagger-ui/index.html` |
+| **PROD** | Production environment – read-only mode (Smoke tests) | `http://tracker-prod.us-east-2.elasticbeanstalk.com/swagger-ui/index.html` |
+| **DEV** | Development environment – full CRUD functionality | `http://tracker-dev.us-east-2.elasticbeanstalk.com/swagger-ui/index.html` |
 
 ---
 
@@ -28,7 +28,7 @@ This repository contains an **API Test Framework** that provides:
 
 All API requests require a **Bearer Token**.  
 The token is obtained from the Auth service:
-http://auth-service.eu-north-1.elasticbeanstalk.com/swagger-ui/index.html
+https://auth-env.us-east-2.elasticbeanstalk.com/swagger-ui/index.html
 
 **Steps:**
 1. Send a POST request with `email` and `password`.
